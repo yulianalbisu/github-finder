@@ -1,17 +1,28 @@
-import React, { Component } from 'react';
+import React from 'react';
 import UserItem from '../layout/UserItem';
+// import { Spinner } from './Spinner';
+import PropTypes from 'prop-types';
+import CircularProgress from '@material-ui/core/CircularProgress';
 
-class Users extends Component {
-  render() {
+const Users = ({ users, loading }) => {
+    if(loading) {
+        return <CircularProgress />
+    } else {
     return (
       <div style={userStyle}>
-        {this.state.users.map(user => (
+        {users.map(user => (
             <UserItem key={user.id} user={user}/>
         ))}
         </div>
     );
-        }
-    }
+        }      
+ }
+
+ Users.propTypes = {
+     users: PropTypes.array.isRequired,
+     loading: PropTypes.bool.isRequired
+ }
+
 
     const userStyle = {
         display: 'grid',
